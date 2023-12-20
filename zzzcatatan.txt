@@ -1,2 +1,14 @@
 1. env
-2. migrate (jangan lupa ganti juga pada model yang dimigrate)
+2. migrate
+    - make migrate (php artisan make:model CampBenefit -m)
+    - ubah model, tambahkan fillable (kolom yang diisi) dan use softdeletes
+    - php artisan migrate
+    part relasi (contoh camp_benefits)
+    - sesuiakan kolom foreign camp_id dari table camp_benefits dengan kolom pk ('id') dari table camps. termasuk tipe data, unsigned, dsb
+    contoh :  $table->bigInteger('camp_id')->unsigned();
+    - $table->foreign('camp_id')->references('id')->on('camps')->onDelete('cascade'); //ketikan pada migration
+    - php artisan migrate:rollback -> php artisan migrate
+    relasi cara kedua :
+    - hapus code :  $table->bigInteger('camp_id')->unsigned();
+    - tuliskan : $table->foreignId('camp_id')->constrained(); //syarat nama table harus sama (pelajari lebih lanjut)
+
