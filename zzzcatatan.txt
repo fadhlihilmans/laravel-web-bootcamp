@@ -11,4 +11,50 @@
     relasi cara kedua :
     - hapus code :  $table->bigInteger('camp_id')->unsigned();
     - tuliskan : $table->foreignId('camp_id')->constrained(); //syarat nama table harus sama (pelajari lebih lanjut)
+3. seeder
+    - php artisan make:seeder CampTableSeeder
+    - following this code :
+        namespace Database\Seeders;
+
+        use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+        use Illuminate\Database\Seeder;
+        // use Str;
+        use App\Models\Camps; //memanggil models
+
+        class CampTableSeeder extends Seeder
+        {
+            public function run(): void
+            {
+                $camps = [
+                    [
+                        'title'         => 'Gila Belajar',
+                        'price'         => 200,
+                        'created_at'    => date('Y-m-d H:i:s', time()),
+                        'updated_at'    => date('Y-m-d H:i:s', time()),
+                    ],
+                    [
+                        'title'         => 'Baru Mulai',
+                        'slug'          => 'baru-mulai',
+                        'price'         => 140,
+                        'created_at'    => date('Y-m-d H:i:s', time()),
+                        'updated_at'    => date('Y-m-d H:i:s', time()),
+                    ],
+
+                ];
+
+                // cara 1
+                // foreach ($camps as $key => $camp) {
+                //     Camps::create($camp);
+                // }
+
+                // cara terbaik
+                Camps::insert($camps);
+            }
+        }
+    -pada databaseseeder.php
+        $this->call([
+            CampTableSeeder::class
+        ]);
+    - php artisan db:seed
+    - (refresh table, delete redudancy) php artisan migrate:fresh --seed
 
