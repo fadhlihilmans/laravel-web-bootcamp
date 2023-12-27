@@ -58,3 +58,8 @@
     - php artisan db:seed
     - (refresh table, delete redudancy) php artisan migrate:fresh --seed
 
+4. Routing
+    - <a href="{{route('login')}}" class="btn btn-master btn-secondary me-3">
+    -   Route::get('login', function () {
+            return view('login'); //nama file view
+        })->name('login'); //terpenting sesuaikan namanya
